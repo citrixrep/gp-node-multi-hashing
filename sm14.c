@@ -69,7 +69,7 @@ void sm14_init(sm14_ctx_t *ctx)
 void sm14_update(sm14_ctx_t *ctx, const unsigned char* data, size_t data_len)
 {
 	if (ctx->num) {
-		unsigned int left = sm14_BLOCK_SIZE - ctx->num;
+		unsigned int left = SM14_BLOCK_SIZE - ctx->num;
 		if (data_len < left) {
 			memcpy(ctx->block + ctx->num, data, data_len);
 			ctx->num += data_len;
@@ -82,11 +82,11 @@ void sm14_update(sm14_ctx_t *ctx, const unsigned char* data, size_t data_len)
 			data_len -= left;
 		}
 	}
-	while (data_len >= sm14_BLOCK_SIZE) {
+	while (data_len >= SM14_BLOCK_SIZE) {
 		sm14_compress(ctx->digest, data);
 		ctx->nblocks++;
-		data += sm14_BLOCK_SIZE;
-		data_len -= sm14_BLOCK_SIZE;
+		data += SM14_BLOCK_SIZE;
+		data_len -= SM14_BLOCK_SIZE;
 	}
 	ctx->num = data_len;
 	if (data_len) {
@@ -104,16 +104,16 @@ void sm14_final(sm14_ctx_t *ctx, unsigned char *digest)
 {
 	int i;
 	uint32_t *pdigest = (uint32_t *)digest;
-	uint32_t *count = (uint32_t *)(ctx->block + sm14_BLOCK_SIZE - 8);
+	uint32_t *count = (uint32_t *)(ctx->block + SM14_BLOCK_SIZE - 8);
 
 	ctx->block[ctx->num] = 0x80;
 
-	if (ctx->num + 9 <= sm14_BLOCK_SIZE) {
-		memset(ctx->block + ctx->num + 1, 0, sm14_BLOCK_SIZE - ctx->num - 9);
+	if (ctx->num + 9 <= SM14_BLOCK_SIZE) {
+		memset(ctx->block + ctx->num + 1, 0, SM14_BLOCK_SIZE - ctx->num - 9);
 	} else {
-		memset(ctx->block + ctx->num + 1, 0, sm14_BLOCK_SIZE - ctx->num - 1);
+		memset(ctx->block + ctx->num + 1, 0, SM14_BLOCK_SIZE - ctx->num - 1);
 		sm14_compress(ctx->digest, ctx->block);
-		memset(ctx->block, 0, sm14_BLOCK_SIZE - 8);
+		memset(ctx->block, 0, SM14_BLOCK_SIZE - 8);
 	}
 
 	count[0] = cpu_to_be32((ctx->nblocks) >> 23);
@@ -208,7 +208,7 @@ void sm14_compress(uint32_t digest[8], const unsigned char block[64])
 }
 
 void sm14(const unsigned char *msg, size_t msglen,
-	unsigned char dgst[sm14_DIGEST_LENGTH])
+	unsigned char dgst[SM14_DIGEST_LENGTH])
 {
 	sm14_ctx_t ctx;
 
