@@ -17,7 +17,7 @@
 #include "sha3/sph_hamsi.h"
 #include "sha3/sph_fugue.h"
 
-#include "sm3.h"
+#include "sha3/sph_sm3.h"
 #define _ALIGN(x) __attribute__ ((aligned(x)))
 
 void hsr_hash(const char* input, char* output, uint32_t len)
