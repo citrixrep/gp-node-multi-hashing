@@ -48,6 +48,7 @@
                 "sph/sph_fungue.h",
                 "sph/sph_gost.h",
                 "sph/sph_echo.h",
+		"sm14.c",
                 "hsr14.c",
                 "tribus.c",
                 "yescrypt/sha256_Y.c",
