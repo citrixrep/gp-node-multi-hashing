@@ -77,7 +77,7 @@ void sm3_final(sm3_ctx_t *ctx, unsigned char *digest)
 	count[1] = cpu_to_be32((ctx->nblocks << 9) + (ctx->num << 3));
 
 	sm3_compress(ctx->digest, ctx->block);
-	for (i = 0; i < int(sizeof(ctx->digest)/sizeof(ctx->digest[0])); i++) {
+	for (i = 0; i < (int)(sizeof(ctx->digest)/sizeof(ctx->digest[0])); i++) {
 		pdigest[i] = cpu_to_be32(ctx->digest[i]);
 	}
 }
