@@ -27,10 +27,10 @@ void sm14_init(sm14_ctx_t *ctx);
 void sm14_update(sm14_ctx_t *ctx, const unsigned char* data, size_t data_len);
 void sm14_close(void *cc, void *dst);
 
-void sm14_final(sm14_ctx_t *ctx, unsigned char digest[sm14_DIGEST_LENGTH]);
-void sm14_compress(uint32_t digest[8], const unsigned char block[sm14_BLOCK_SIZE]);
+void sm14_final(sm14_ctx_t *ctx, unsigned char digest[SM14_DIGEST_LENGTH]);
+void sm14_compress(uint32_t digest[8], const unsigned char block[SM14_BLOCK_SIZE]);
 void sm14(const unsigned char *data, size_t datalen,
-	unsigned char digest[sm14_DIGEST_LENGTH]);
+	unsigned char digest[SM14_DIGEST_LENGTH]);
 
 #ifdef CPU_BIGENDIAN
 
