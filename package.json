@@ -11,8 +11,8 @@
         "url": "https://github.com/Pczz/gp-node-multi-hashing.git"
     },
     "dependencies": {
-        "bindings": "^1.3.0",
-        "nan": "^2.6.2"
+        "bindings": "1.3.0",
+        "nan": "2.6.2"
     },
     "keywords": [
         "scrypt",
