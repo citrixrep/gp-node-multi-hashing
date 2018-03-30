@@ -49,7 +49,6 @@
                 "sph/sph_gost.h",
                 "sph/sph_echo.h",
                 "hsr14.c",
-                "sm3.c",
                 "tribus.c",
                 "yescrypt/sha256_Y.c",
                 "yescrypt/yescrypt-best.c",
