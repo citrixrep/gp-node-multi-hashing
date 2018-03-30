@@ -17,7 +17,7 @@
 #include "sha3/sph_hamsi.h"
 #include "sha3/sph_fugue.h"
 
-#include "sha3/sph_sm3.h"
+#include "sm14.h"
 #define _ALIGN(x) __attribute__ ((aligned(x)))
 
 void hsr_hash(const char* input, char* output, uint32_t len)
@@ -33,7 +33,7 @@ void hsr_hash(const char* input, char* output, uint32_t len)
     sph_shavite512_context  ctx_shavite1;
     sph_simd512_context     ctx_simd1;
     sph_echo512_context     ctx_echo1;
-    sm3_ctx_t               ctx_sm3;
+    sm14_ctx_t               ctx_sm14;
     sph_hamsi512_context    ctx_hamsi1;
     sph_fugue512_context    ctx_fugue1;
 
@@ -83,10 +83,10 @@ void hsr_hash(const char* input, char* output, uint32_t len)
     sph_echo512(&ctx_echo1, hash, 64);
     sph_echo512_close(&ctx_echo1, hash);
 
-    sm3_init(&ctx_sm3);
-    sm3_update(&ctx_sm3, hash, 64);
+    sm14_init(&ctx_sm14);
+    sm14_update(&ctx_sm14, hash, 64);
     memset(hash, 0, sizeof hash);
-    sm3_close(&ctx_sm3, hash);
+    sm14_close(&ctx_sm14, hash);
 
     sph_hamsi512_init(&ctx_hamsi1);
     sph_hamsi512(&ctx_hamsi1, hash, 64);
