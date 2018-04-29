@@ -13,6 +13,7 @@ Algorithms
 * quark
 * x11
 * x13
+* x18
 * nist5
 * scrypt
 * scryptn
