@@ -25,6 +25,7 @@ extern "C" {
     #include "nist5.h"
     #include "sha1.h"
     #include "x15.h"
+    #include "x18.h"
     #include "fresh.h"
     // news algos added by nosekefik
     #include "phi1612.h"
@@ -437,7 +438,25 @@ NAN_METHOD(x13) {
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 }
+NAN_METHOD(x18) {
 
+    if (info.Length() < 1)
+        return THROW_ERROR_EXCEPTION("You must provide one argument.");
+
+    Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
+
+    if(!Buffer::HasInstance(target))
+        return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
+
+    char * input = Buffer::Data(target);
+    char *output = (char*) malloc(sizeof(char) * 32);
+
+    uint32_t input_len = Buffer::Length(target);
+
+    x18_hash(input, output, input_len);
+
+    info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
+}
 NAN_METHOD(x13bcd) {
 
     if (info.Length() < 1)
@@ -877,6 +896,7 @@ NAN_MODULE_INIT(init) {
     Nan::Set(target, Nan::New("shavite3").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(shavite3)).ToLocalChecked());
     Nan::Set(target, Nan::New("cryptonight").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(cryptonight)).ToLocalChecked());
     Nan::Set(target, Nan::New("x13").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(x13)).ToLocalChecked());
+    Nan::Set(target, Nan::New("x18").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(x18)).ToLocalChecked());
     Nan::Set(target, Nan::New("x13bcd").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(x13bcd)).ToLocalChecked());
     Nan::Set(target, Nan::New("boolberry").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(boolberry)).ToLocalChecked());
     Nan::Set(target, Nan::New("nist5").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(nist5)).ToLocalChecked());
