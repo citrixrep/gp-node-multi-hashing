@@ -74,7 +74,6 @@
                 "sha3/hamsi.c", 
 		"sha3/sm3.c",
                 "magimath.c",
-                "m7.c",
                 "crypto/oaes_lib.c",
                 "crypto/c_keccak.c",
                 "crypto/c_groestl.c",
